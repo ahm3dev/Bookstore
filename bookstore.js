@@ -1,4 +1,3 @@
-
 //Objects array
 let bookList = [
     {id: 1, bookTitle: "Start with why", author: "Simon Sinek", price: 80.0, quantity: 13},
@@ -7,41 +6,37 @@ let bookList = [
     {id: 4, bookTitle: "Zero to One", author: "Peter Thiel", price: 45, quantity: 12},
     {id: 5, bookTitle: "You don't know JS", author: "Kyle Simpson", price: 39.9, quantity: 9}
 ]
-//Search book id, if 
+//Search book id, if not found return undefined
 let searchBookId = id => {
     let book = bookList.find(bookList => bookList.id === id);
     if(book != undefined)
         return bookList.findIndex(bookList => bookList.id === id);
-    return undefined;
 }
-
+//Search book title, if not found return undefined
 let searchBookTitle = title => {
     let book = bookList.find(bookList => bookList.bookTitle === title);
     if(book != undefined)
         return bookList.findIndex(bookList => bookList.bookTitle === title);
-    return undefined;
 }
-
+//Search book author, if not found return undefined
 let searchBookAuthor = author => {
     let book = bookList.find(bookList => bookList.author === author);
     if(book != undefined)
         return bookList.findIndex(bookList => bookList.author === author);
-    return undefined;
 }
-
+//check if quantity entered by user is available
 let searchBookQuantity = (book, quantity) => {
-    let bookQuantityRef = bookList[searchBookTitle(book)].quantity;
+    let bookQuantityRef = bookList[searchBookTitle(book)].quantity; //a variable that references the number of books available
     if (quantity <= bookQuantityRef)
         return bookQuantityRef -= quantity;
     return "Not enough books in stock to fulfil your order.";
 }
-
+//Check if user balance is enough
 let checkCost = (book, quantity, balance) => {
-    let bookCostRef = bookList[searchBookTitle(book)].price;
+    let bookCostRef = bookList[searchBookTitle(book)].price; //a variable that references the price of the book
     bookCostRef *= quantity;
     if (balance >= bookCostRef)
         return "Success"
-    return "404";
 }
 
 let receipt = (title, quantity, balance) => {
@@ -52,13 +47,14 @@ let receipt = (title, quantity, balance) => {
         return `
                 Bookstore
         -------------------------
-        ${title}     ${bookCostRef / quantity}SAR
-        Qty:               ${quantity}
+        ${title}     
+        Price:           ${bookCostRef / quantity}SAR
+        Qty:             ${quantity}
         -------------------------
-        TOTAL:             ${bookCostRef}SAR
+        TOTAL:           ${bookCostRef}SAR
         -------------------------
-        CASH               ${balance}SAR
-        CHANGE:            ${change.toFixed(2)}SAR
+        CASH             ${balance}SAR
+        CHANGE:          ${change.toFixed(2)}SAR
         -------------------------
         Paid with CASH
         =========================
